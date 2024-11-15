@@ -12,3 +12,6 @@ casado = True
 estatura = 1.82
 print("hola  " + nombre +" "+apellido+enunciado2)
 
+
+
+
