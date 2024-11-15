@@ -9,5 +9,20 @@ git add -A
 grabar los archivos que pise git add
 git commit -m "agreger archivo readme"
 
-subir cambios github
+subir cambios github primera vez
 git push -u origin main
+
+despues solo
+git push
+
+ver ramas
+git branch
+
+crear ramas
+git branch semana01
+
+crear y pasar a dicha rama
+git checkout -b nombre de rama
+
+mover a una ram
+git checkout nombre de rama
