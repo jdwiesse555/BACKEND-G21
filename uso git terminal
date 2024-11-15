@@ -1,0 +1,13 @@
+un archivo especifico
+git add README.md xxx.ds
+todos archivos de nivels mas bajos
+git add .
+todos los archivos del repositorio
+git add -A
+
+
+grabar los archivos que pise git add
+git commit -m "agreger archivo readme"
+
+subir cambios github
+git push -u origin main
