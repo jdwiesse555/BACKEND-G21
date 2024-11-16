@@ -40,3 +40,7 @@ print(numerazo+1)
 numero4 , numero5 = 3 , 56
 print(numero5)
 print(numero4)
+
+#poner formato a un numero con redondeo
+resultado = 10/9
+print("{:.4f}".format(resultado))
