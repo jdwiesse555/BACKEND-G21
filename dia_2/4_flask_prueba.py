@@ -5,9 +5,11 @@ app = Flask(__name__)
 @app.route('/')
 def inicio():
     print('hola')
-    return
-        '<h1> hola mundo </h1> '
-        '<h2>sdsdsd<h2>'
+    html='''<h1> hola mundo </h1>
+    <h2>saludos para todos</2>
+    titulo  '''
+    return html
+       
 
     
 

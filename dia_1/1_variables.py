@@ -30,3 +30,12 @@ estatura = 1.82
 
 print(otro_enunciado)
 print(100)
+
+mensaje = f'la suma de 5 + 6 es {5+6}'
+print(mensaje)
+
+mensaje = 'la suma de 5 * 6 es {} y 5 + 6 es {}'.format(5*6,5+6)
+print(mensaje)
+
+mensaje = 'la suma de 5 * 6 es {0} y 5 + 6 es {1}'.format(5*6,5+6)
+print(mensaje)
