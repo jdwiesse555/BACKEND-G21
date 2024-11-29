@@ -11,3 +11,15 @@ git commit -m "agreger archivo readme"
 
 subir cambios github
 git push -u origin main
+
+
+un entorno virtual
+crear
+python -m venv entorno_semana031
+usar 
+source entorno_semana031/Scripts/activate
+desactivar
+deactivate
+
+borrar
+rm -rf entorno_semana031
