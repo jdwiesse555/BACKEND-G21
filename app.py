@@ -3,7 +3,9 @@ from instancias import conexion
 from os import environ
 from dotenv import load_dotenv
 from flask_migrate import Migrate
+from flask_restful import Api
 from models import *
+from controllers import *
 
 # revisara si hay algun archivo llamado .env y leera las variables definidas en el y las colocara como variables de entorno
 load_dotenv()
@@ -27,6 +29,11 @@ conexion.init_app(app)
 #     id = Column(type_=types.Integer)
 
 Migrate(app, conexion)
+
+api = Api(app)
+api.add_resource(CategoriaControlles,'/categorias')
+api.add_resource(ManejoCategoriaController,'/categoria/<id>')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
