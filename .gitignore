@@ -3,3 +3,5 @@
 entorno_*
 
 *.pyc
+
+.env
