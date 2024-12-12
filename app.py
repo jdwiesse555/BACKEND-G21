@@ -31,8 +31,10 @@ conexion.init_app(app)
 Migrate(app, conexion)
 
 api = Api(app)
+# Declaracion de rutas
 api.add_resource(CategoriaControlles,'/categorias')
 api.add_resource(ManejoCategoriaController,'/categoria/<id>')
+api.add_resource(ProductoController,'/productos')
 
 
 if __name__ == '__main__':

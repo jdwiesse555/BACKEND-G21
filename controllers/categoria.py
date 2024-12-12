@@ -42,14 +42,19 @@ class CategoriaControlles(Resource):
             }    
         
 class ManejoCategoriaController(Resource):
-    def get(self,id):
-        # select * from categorias where id= '  ' limit 1
-       categoria_encontrada = conexion.session.query(CategoriaModel).filter(CategoriaModel.id==int(id)).first()  
+    def validarCategoria(self,id):
+        categoria_encontrada = conexion.session.query(CategoriaModel).filter(
+            CategoriaModel.id==int(id)).first()  
 
-       if categoria_encontrada is None:
-           return {
-               'message':'categoria no existe'
-           }
+        
+        return {'message':'categoria no existe'} if categoria_encontrada is None else categoria_encontrada
+        
+ 
+    def get(self,id):
+       categoria_encontrada=self.validarCategoria(id)
+
+       if type(categoria_encontrada)== dict:
+           return categoria_encontrada
        
        serializador = CategoriaSerializer()
        resultado = serializador.dump(categoria_encontrada)
@@ -57,3 +62,63 @@ class ManejoCategoriaController(Resource):
        return {
            'content':resultado
        }
+    
+    def put(self,id):
+       
+       categoria_encontrada=self.validarCategoria(id)
+       if type(categoria_encontrada)== dict:
+           return categoria_encontrada
+       data = request.get_json()
+       serializador = CategoriaSerializer()
+       try:
+            #carga la informacion y la validad
+            data_validada= serializador.load(data)
+            # quiero pasar un dic parametros de una funcion
+            categoria_encontrada.nombre = data_validada.get('nombre')
+            categoria_encontrada.disponibilidad = data_validada.get('disponibilidad') if data_validada.get(
+                'disponibilidad') is not None else categoria_encontrada.disponibilidad
+
+            #agregar en la dase datos
+            
+            conexion.session.commit()
+
+            resultado = serializador.dump(categoria_encontrada)
+            return {
+                'message': 'Categoria modificaada exitosamente',
+                'content': resultado
+            }
+
+       except ValidationError as error:
+            return {
+                'message':'Error al actualizar la Categoria',
+                'content': error.args
+            }    
+        
+ 
+    def delete(self,id):
+       
+       categoria_encontrada=self.validarCategoria(id)
+       if type(categoria_encontrada)== dict:
+           return categoria_encontrada
+       data = request.get_json()
+       serializador = CategoriaSerializer()
+       try:
+
+
+            #agregar en la dase datos
+            conexion.session.delete(categoria_encontrada)
+            conexion.session.commit()
+
+            resultado = serializador.dump(categoria_encontrada)
+            return {
+                'message': 'Categoria borrada exitosamente',
+                'content': resultado
+            }
+
+       except ValidationError as error:
+            return {
+                'message':'Error al actualizar la Categoria',
+                'content': error.args
+            }    
+        
+ 

@@ -1,1 +1,2 @@
 from .categoria import CategoriaControlles,ManejoCategoriaController
+from .producto import ProductoController
