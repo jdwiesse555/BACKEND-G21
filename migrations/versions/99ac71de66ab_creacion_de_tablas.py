@@ -63,7 +63,7 @@ def upgrade_mysql():
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('nombre', sa.Text(), nullable=True),
     sa.Column('apellido', sa.Text(), nullable=True),
-    sa.Column('correo', sa.Text(), nullable=True),
+    sa.Column('correo', sa.String(100), nullable=True),
     sa.Column('password', sa.Text(), nullable=False),
     sa.Column('tipo_usuario', sa.Enum('ADMIN', 'CLIENTE', 'EMPLEADO', name='tipousuario'), nullable=True),
     sa.PrimaryKeyConstraint('id'),
