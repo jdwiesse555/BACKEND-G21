@@ -20,3 +20,9 @@ class RegistroSerializer(SQLAlchemyAutoSchema):
 class LoginSerialize(Schema):
     correo = fields.Email(requered=True)
     password = fields.String(requered=True)
+
+class UpdateSerialize(Schema):
+    nombre = fields.String(requered=False)
+    apellido = fields.String(requered=False)
+    password = fields.String(requered=False)
+

@@ -1,2 +1,2 @@
-from .categoria import CategoriasController
-from .usuario_controller import RegistroController,LoginController
+from .categoria import CategoriasController,CategoriaController
+from .usuario_controller import RegistroController,LoginController,UsuarioController
