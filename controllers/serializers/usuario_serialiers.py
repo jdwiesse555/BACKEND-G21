@@ -26,3 +26,8 @@ class UpdateSerialize(Schema):
     apellido = fields.String(requered=False)
     password = fields.String(requered=False)
 
+
+class OlvidePasswordSerialize(Schema):
+    correo = fields.Email(requered=True)
+
+

@@ -1,7 +1,8 @@
 from flask_restful import Resource,request
 from models import Usuario
 from instancias import conexion
-from .serializers import RegistroSerializer,LoginSerialize,UpdateSerialize
+from .serializers import (RegistroSerializer,LoginSerialize,
+                          UpdateSerialize,OlvidePasswordSerialize)
 from marshmallow.exceptions import ValidationError
 from bcrypt import gensalt,hashpw,checkpw
 from flask_jwt_extended import create_access_token,jwt_required,get_jwt_identity
@@ -150,7 +151,30 @@ class UsuarioController(Resource):
         #crear un seriealizado Manual en el cual vamos a indicar que recibimos el nomnre de password ambos e caracter opcional
         # en la base  a la verificacion del serializacion vamos a hacer la actualizacion de nuestro usaurio
        
+class OlvidePasswordComtroller(Resource):
+    def post(self):
+        serializador = OlvidePasswordSerialize()
+        try:
+            data_serializada = serializador.load(request.get_json())
+            usuario_encontrado = conexion.session.query(Usuario).filter(
+                Usuario.correo == data_serializada.get('correo')).with_entities(Usuario.id).first()
+            if usuario_encontrado is None:
+                return{
+                    'message':'Usuario no se encuentra en la BD' 
+                }
 
+            return {
+                'message':'Correo enviado con las indicaciones'
+            }
+        except ValidationError as error:
+            return {
+                'message':'Usuario al ejecutar el olvido de password',
+                'content':error.args
+            }
+
+        return {
+            'message': 'Correo enviado con las indicaciones'
+        }
 
 
     
