@@ -31,7 +31,7 @@ api.add_resource(CategoriaController,'/categoria/<int:id>')
 api.add_resource(RegistroController,'/registro')  #crear nuevos usuarios
 api.add_resource(LoginController,'/login')  # logearse
 api.add_resource(UsuarioController,'/usuario') # ver y modificar usuarios
-
+api.add_resource(OlvidePasswordComtroller,'/forgot-password')
 
 if __name__=='__main__':
     app.run(debug=True)

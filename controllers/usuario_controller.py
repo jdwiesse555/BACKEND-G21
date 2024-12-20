@@ -1,11 +1,12 @@
 from flask_restful import Resource,request
 from models import Usuario
-from instancias import conexion
+from instancias import conexion,encriptador
 from .serializers import (RegistroSerializer,LoginSerialize,
                           UpdateSerialize,OlvidePasswordSerialize)
 from marshmallow.exceptions import ValidationError
 from bcrypt import gensalt,hashpw,checkpw
 from flask_jwt_extended import create_access_token,jwt_required,get_jwt_identity
+from mensajeria import enviar_email
 
 
 
@@ -157,12 +158,20 @@ class OlvidePasswordComtroller(Resource):
         try:
             data_serializada = serializador.load(request.get_json())
             usuario_encontrado = conexion.session.query(Usuario).filter(
-                Usuario.correo == data_serializada.get('correo')).with_entities(Usuario.id).first()
+                Usuario.correo == data_serializada.get('correo')).with_entities(Usuario.id,Usuario.correo).first()
             if usuario_encontrado is None:
                 return{
                     'message':'Usuario no se encuentra en la BD' 
                 }
-
+            mensaje = {'usuario_id': usuario_encontrado[0],
+                       'message':'Mensaje oculto'}
+            print(mensaje)
+            token = encriptador.encrypt(bytes(str(mensaje),'utf-8'))
+            print(token)
+            print(usuario_encontrado)
+            enviar_email(usuario_encontrado[1],
+                     'restauracion de la contraseña',
+                     token.decode('utf-8'))
             return {
                 'message':'Correo enviado con las indicaciones'
             }
@@ -171,6 +180,7 @@ class OlvidePasswordComtroller(Resource):
                 'message':'Usuario al ejecutar el olvido de password',
                 'content':error.args
             }
+        
 
         return {
             'message': 'Correo enviado con las indicaciones'
