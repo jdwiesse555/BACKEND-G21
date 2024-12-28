@@ -167,11 +167,13 @@ class OlvidePasswordComtroller(Resource):
                        'message':'Mensaje oculto'}
             print(mensaje)
             token = encriptador.encrypt(bytes(str(mensaje),'utf-8'))
-            print(token)
-            print(usuario_encontrado)
+            url = f'http://127.0.0.1:5500/frontend/reset-password/?token={
+                token.decode('utf-8')}'
+
+
             enviar_email(usuario_encontrado[1],
                      'restauracion de la contraseña',
-                     token.decode('utf-8'))
+                     url)
             return {
                 'message':'Correo enviado con las indicaciones'
             }
