@@ -35,6 +35,8 @@ resetPasswordBtn.addEventListener("click", (e) => {
         confirmButtonText: "Entendido",
       }).then(() => {
         // Cambiamos el endpoint de nuestra pagina y le ponemos el login
+        console.log(resultado)
+        sessionStorage.setItem("token",resultado.token)
         window.location.pathname = "/frontend/aplicativo";
       });}
     
@@ -57,6 +59,6 @@ const inicioSession = async (correo,clave) => {
     },
   });
   const respuesta = await resultado.json();
-
+ 
   return respuesta;
 };

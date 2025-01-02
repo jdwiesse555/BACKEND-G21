@@ -2,13 +2,17 @@ const BACKEND_URL = "http://127.0.0.1:5000";
 const contenedor = document.getElementById("contenedor");
 
 
-const data_categorias = async (data) => {
+
+const data_categorias = async () => {
+    
+   
+    /*token= `environ.get('TOKEN_ACCESO')`*/
     
     const resultado = await fetch(`${BACKEND_URL}/categorias`, {
       method: "GET",
        // Convertir nuestro json de javascript a un JSON que pueda recibir el backend,
       headers: {
-      /*  "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczNTI0NDAzMiwianRpIjoiYjVkYTlkMjYtYWFmYS00NmQ2LWFjY2MtYmI1MjQ4ODUxMTViIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjEiLCJuYmYiOjE3MzUyNDQwMzIsImNzcmYiOiI1ZmI1YjFjYi0yZGI5LTRlZjUtYmZmYi00MThmYjMyYTkyNTIiLCJleHAiOjE3MzUyNTUxNDJ9.5QW4AlWLP945M5jgMwWdcYgm0XG1VPo234S6XMhOkq0" ,*/
+        "Authorization" : 'Bearer '+sessionStorage.getItem("token"),
         "Content-Type": "application/json", // Indicar el tipo de informacion que estoy enviando en el body
       },
     });
@@ -18,7 +22,7 @@ const data_categorias = async (data) => {
   };
 
 
-  data_categorias("paso")
+  data_categorias()
   .then((resultado) => {
      console.log((resultado));
 

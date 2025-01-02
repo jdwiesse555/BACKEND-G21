@@ -7,6 +7,8 @@ from marshmallow.exceptions import ValidationError
 from bcrypt import gensalt,hashpw,checkpw
 from flask_jwt_extended import create_access_token,jwt_required,get_jwt_identity
 from mensajeria import enviar_email
+from flask import session
+
 
 
 
@@ -76,6 +78,7 @@ class LoginController(Resource):
                 #identity > es el identificador para reconoser a que usaurio le pertenece esa token
                 #el identity siemplre debe ser un spring
                 token=create_access_token(identity=str(usuario_encontrado.id))
+                
                 return {
                     'message':'Bienvenido',
                     'token':token

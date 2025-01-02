@@ -34,8 +34,9 @@ class CategoriasController(Resource):
                 'content': error.args
             }
     
-
+    @jwt_required()
     def get(self):
+
         # select * from categorias
         categorias = conexion.session.query(Categoria).all()
 
