@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block titulo_pagina %} editar  Productos {% endblock %}
+{% block titulo %} Crear  Producto {% endblock %}
+{% block contenido %}
+<div class="container p-3">
+    <h1>Formulario para la edicion de  productos</h1>
+    <form method="post">
+        {#cuando nostros queremos utilizar un formulario endjango con plantillas tenemos que enviar token csrf #}
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="idProducto" class="form-label">id</label>
+            <input type="text" class="form-control" name="idProducto" id="idProducto" 
+            value="{{  data.id }}" readonly >
+        </div>
+        <div class="mb-3">
+            <label for="nombreProducto" class="form-label">Nombre</label>
+            <input type="text" class="form-control" name="nombreProducto" id="nombreProducto" 
+            value="{{  data.nombre }}"  >
+        </div>
+        <div class="mb-3">
+            <label for="descripcionProducto" class="form-label">Descripcion</label>
+            <input type="text" class="form-control" name="descripcionProducto" id="descripcionProducto" 
+            value="{{ data.descripcion }}">
+        </div>
+        <div class="d-grid gap-2">
+            <button type="submit" class="btn btn-success" id="btmCrearProducto">Actulizar Producto</button>
+        </div>
+    </form>
+</div>
+{% load static%}
+<script src="{% static 'formulario_producto.js' %}" ></script>
+{% endblock %}

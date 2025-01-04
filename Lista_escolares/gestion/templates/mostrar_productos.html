@@ -1,0 +1,45 @@
+{# Para rutilzar un plantilla dentro de otra usamos extends #}
+{% extends 'base.html' %}
+{% block titulo_pagina %} Mostrar  Productos {% endblock %}
+{% block titulo %} Mostrar  Productos {% endblock %}
+{% block contenido %}
+{# si queremos agregar estilos /js en nuestro html tenemos que usar reerencia #}
+{% load static %}
+<link rel="stylesheet" href="{% static 'estilos_mostrar_productos.css' %}">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+<div class="container">
+    {# https://jinja.palletsprojects.com/en/stable/templates/ #}
+    <p> {{ mensaje }}</p>
+    <br/>
+    <p>Los productos disponibles son</p>
+    <table class="table table-dark table-striped">
+        <thead>
+            <tr>
+                <td>ID</td>
+                <td>NOMBRE</td>
+                <td>descripcion</td>
+                <td>Acciones</td>
+            </tr>
+
+    {% for producto in data  %} 
+    <tr>
+        <td>{{  producto.id }}</td>
+        <td> {{  producto.nombre }} </td>
+        <td> {{  producto.descripcion }} </td>
+        <td>
+            <div className="flex gar-0.5">
+                <a href="{% url 'edit_producto' producto.id %}" class=""btn text-sevondary px-0>
+                    <i class="far fa-edit fa-lg"></i> edit
+                </a>
+                <a href="{% url 'borrar_producto' producto.id %}" class=""btn text-sevondary px-0>
+                    <i class="far fa-trash-alt fa-lg"></i> borrar
+                </a>                
+                 
+            </div>
+        </td>
+    </tr>
+    {% endfor %}
+    </thead>
+</table>
+</div>
+{% endblock %}
