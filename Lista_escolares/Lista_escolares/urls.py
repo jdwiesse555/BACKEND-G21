@@ -20,5 +20,6 @@ from django.urls import path , include
 urlpatterns = [
     path('admin/', admin.site.urls),
     # agregamos todas las rutas del archivo de la aplicacion
-    path('gestion/', include('gestion.urls'))
+    path('gestion/', include('gestion.urls')),
+    path('login/', include('login.urls'))
 ]

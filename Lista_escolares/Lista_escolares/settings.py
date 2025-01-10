@@ -43,7 +43,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # Ahora agregamos las aplicaciones creadas manualmente
-    'gestion'
+    'gestion',
+    'login',
+    'rest_framework'
 ]
 
 MIDDLEWARE = [
@@ -129,6 +131,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+# correo 
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT =587
+EMAIL_HOST_USER='javier.wiesse@gmail.com'
+EMAIL_HOST_PASSWORD='czraplciiteyxhvd'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

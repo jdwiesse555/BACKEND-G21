@@ -1,0 +1,18 @@
+<h1> crear login </h1>
+
+<form method="POST">
+    {% csrf_token %}
+   <h1>{{error}}</h1> 
+    
+    {{ form.as_p}}
+    <button>
+        crear
+    </button> 
+</form>
+<div className="flex gar-0.5">
+    <a href="{% url '' %}" class="btn text-sevondary px-0">
+         login
+    </a>
+          
+     
+</div>
