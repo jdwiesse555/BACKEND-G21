@@ -1,0 +1,24 @@
+{
+  "name": "probando_express",
+  "version": "1.0.0",
+  "description": "probando la api usando express",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [
+    "api",
+    "express",
+    "backend"
+  ],
+  "author": "javier wiesse",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.9"
+  }
+}
