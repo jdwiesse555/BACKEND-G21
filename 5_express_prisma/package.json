@@ -1,0 +1,27 @@
+{
+  "name": "express_prima",
+  "version": "1.0.0",
+  "description": "dd",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "keywords": [
+    "express",
+    "prisma",
+    "backend"
+  ],
+  "author": "javier wiesse",
+  "license": "ISC",
+  "devDependencies": {
+    "@prisma/client": "^6.2.1",
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.2.1"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2"
+  }
+}
