@@ -1,0 +1,82 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Usuario {
+  id Int @id @default(autoincrement())
+  email String @db.Text @unique
+  password String? @db.Text
+  tipoUsuario TipoUsuario  @default(USUARIO) @map("tipo_usuario")
+  nombre String? @db.Text
+  apellido String? @db.Text
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+
+  @@map("usuarios")
+}
+
+model Equipo {
+  id Int @id @default(autoincrement())
+  nombre String @db.Text
+  estadio String? @db.Text
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+ 
+  imagenId Int @unique @map("imagen_id") 
+  imagen Imagen @relation(fields: [imagenId],references: [id])
+
+ 
+  equipo_v Equipo[]
+
+ @@map("equipos")
+}
+
+model Partido{
+  id Int @id @default(autoincrement())
+  fecha DateTime? 
+  hora DateTime?
+  equipo_local_id Int 
+  equipo_visitante_id Int?
+  score_equipo_local Int?
+  score_equipo_visitante Int?
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+  
+
+ equipo_l Equipo @relation(fields: [equipo_local_id],references: [id])
+ equipo_v Equipo @relation(fields: [equipo_visitante_id ],references: [id])
+
+ @@map("partidos")
+}
+
+model Imagen {
+  id Int @id @default(autoincrement())
+  path String? @db.Text
+  ext  String? @db.Text
+  nombre String? @db.Text
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+  equipo_id Int 
+
+  equipo Equipo?
+ 
+
+@@map("imagenes")
+}
+
+enum TipoUsuario {
+  ADMIN
+  USUARIO
+  MODERADOR
+}

@@ -1,0 +1,21 @@
+{
+  "name": "fixture_liga1",
+  "version": "1.0.0",
+  "description": "proyecto del backend para mostrar los partidos de la liga1",
+  "main": "index.js",
+  "type":"module",
+  "scripts": {
+    "start":"node --env-file=.env src/index.js",
+    "dev":"nodemon --env-file=.env src/index.js"
+  },
+  "author": "javier wiesse",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.0",
+    "nodemon": "^3.1.9",
+    "prisma": "^6.2.1"
+  }
+}
