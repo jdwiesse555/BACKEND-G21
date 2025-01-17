@@ -1,17 +1,29 @@
 import express from "express";
 import { usuarioEnrutador } from "../routes/usuario.routes.js";
 import { ZodError } from "zod";
+import { Prisma } from "@prisma/client";
+import cors from "cors";
+import { equipoEnrutador } from "../routes/equipo.routes.js";
+
 const servidor = express();
+// cros para poder permitir peticiones en mi backend
+servidor.use(cors());
 servidor.use(express.json());
 
 //agregar rutas
 servidor.use(usuarioEnrutador);
+servidor.use(equipoEnrutador);
 //Para capturar el error local debe estar antes de las rutas
 servidor.use((error,req,res,next) => {
     if(error instanceof ZodError){
         return res.status(400).json({
             message:"Error al recibir la informacion",
             content:error.errors,
+        })
+    }
+    if (error instanceof Prisma.PrismaClientKnownRequestError){
+        return res.status(404).json({
+            message:`El ${error.meta.modelName } no existe`,
         })
     }
     return res.status(400).json({

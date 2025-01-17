@@ -1,1 +1,4 @@
 nvs use latest
+
+    "email":"javier.wiesse@gmial.com",
+    "password":"Welcome12#"
