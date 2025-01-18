@@ -28,7 +28,7 @@ model Usuario {
 
 model Equipo {
   id Int @id @default(autoincrement())
-  nombre String @db.Text
+  nombre String @db.Text @unique
   estadio String? @db.Text
   createdAt DateTime  @default(now())   @map("created_at")
   updatedAt DateTime @updatedAt() @map("updated_at")

@@ -4,6 +4,13 @@ import { ZodError } from "zod";
 import { Prisma } from "@prisma/client";
 import cors from "cors";
 import { equipoEnrutador } from "../routes/equipo.routes.js";
+import AWS from "aws-sdk"
+
+new AWS.S3({ credentials : {
+    accessKeyId:process.env.ACCESS_KEY,
+    secretAccessKey:process.env.SECRET_ACCESS_KEY,
+     }
+});
 
 const servidor = express();
 // cros para poder permitir peticiones en mi backend
@@ -26,6 +33,8 @@ servidor.use((error,req,res,next) => {
             message:`El ${error.meta.modelName } no existe`,
         })
     }
+
+    console.log(error)
     return res.status(400).json({
         message:"Error al hacer la peticion"
     })

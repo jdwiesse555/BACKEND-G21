@@ -104,10 +104,7 @@ export const devolverUsuario = async (req,res) => {
 }
 
 export const devolverUsuarios = async (req,res) => {
-    const Listausuarios = await conexion.usuario.findMany({
-
-
-    })
+    const Listausuarios = await conexion.usuario.findMany()
     console.log(Listausuarios)
     return res.json({
         message:"Lista de Usuarios exitosamente",
