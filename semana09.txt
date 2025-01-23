@@ -1,0 +1,18 @@
+nvs use latest
+npm run dev
+
+    "email":"javier.wiesse@gmial.com",
+    "password":"Welcome12#"
+
+ npx prisma migrate dev
+cada vez que modificamos en la tablas 
+
+
+cargar data de archivo seed 
+npx prisma db seed
+
+
+aws
+
+Javier.wiesse@gamil.com
+yK*aR*fYz5j@qw^
