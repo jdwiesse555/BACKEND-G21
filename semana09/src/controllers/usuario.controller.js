@@ -5,7 +5,7 @@ import JWT from "jsonwebtoken";
 
 
 export const  registrarUsuario = async (req,res) => {
-    const data = req.body
+    const data = req.body.user
     //valida si la data esta corresta
    
     const dataValidada = registrarUsuarioSerializer.parse(data);
@@ -73,9 +73,11 @@ export const login = async (req,res) => {
 
 
 export const actulizarUsuario = async (req,res) => {
-    console.log(req.user)
-    const dataValidada = actulizarUsuarioSerializer.parse(req.body)
-    console.log(dataValidada)
+    
+    const dataValidada = actulizarUsuarioSerializer.parse(req.body.user)
+    
+    const salt = await genSalt();
+    dataValidada.password = await hash(dataValidada.password,salt)
     const usarioActualizado = await conexion.usuario.update({
         data : dataValidada,
         select: {
@@ -86,9 +88,11 @@ export const actulizarUsuario = async (req,res) => {
             tipoUsuario:true,
         },
         where: {
-            id:req.user.id
+            id:Number(req.body.id)
         },
     })
+    
+    console.log(usarioActualizado)
     return res.json({
         message:"Usuario actualizado exitosamente",
         content : usarioActualizado,
@@ -102,6 +106,19 @@ export const devolverUsuario = async (req,res) => {
          }
     )
 }
+export const devolverUsuarioid = async (req,res) => {
+       
+
+    const usuarioEncontrado = await conexion.usuario.findFirstOrThrow({
+        where: { id:Number(req.body.id)},
+    });
+    console.log(usuarioEncontrado)
+    return res.json({
+        message:"Lista de Usuarios exitosamente",
+        content : usuarioEncontrado,
+         }
+    )
+}
 
 export const devolverUsuarios = async (req,res) => {
     const Listausuarios = await conexion.usuario.findMany()
@@ -109,5 +126,30 @@ export const devolverUsuarios = async (req,res) => {
     return res.json({
         message:"Lista de Usuarios exitosamente",
         content : Listausuarios,
+    })
+}
+
+export const borrarUsuario = async (req,res) => {
+ 
+    console.log("pasoborrasdo")
+    console.log(req.body.id)
+    const usarioborrado = await conexion.usuario.delete({
+      
+        select: {
+            id :true,
+            nombre:true,
+            apellido:true,
+            email:true,
+            tipoUsuario:true,
+        },
+        where: {
+            id:Number(req.body.id)
+        },
+    })
+    
+    console.log(usarioborrado)
+    return res.json({
+        message:"Usuario borrado exitosamente",
+        content : usarioborrado,
     })
 }

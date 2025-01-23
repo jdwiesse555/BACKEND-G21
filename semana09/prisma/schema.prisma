@@ -84,3 +84,61 @@ enum TipoUsuario {
   USUARIO
   MODERADOR
 }
+
+
+model listametricas{
+  id  Int @id @default(autoincrement())
+  metrica String @db.Text
+  comentario String? @db.Text
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+
+  metricas metricas[]
+  tanques tanques[]
+  mediciones mediciones[]
+}
+
+model metricas{
+  id  Int @id @default(autoincrement())
+  metrica Int
+  medida String @db.Text
+  vol_bbls Decimal 
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+
+    lmetrica listametricas @relation(fields: [metrica],references: [id])
+}
+
+model tanques{
+  id  Int @id @default(autoincrement())
+  codigo String @db.Text
+  metrica Int
+  capacidad Decimal 
+  HEIGHT_PIES Decimal 
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+
+mediciones mediciones[]
+
+    listametrica listametricas @relation(fields: [metrica],references: [id])
+     
+}
+
+model mediciones {
+  id Int @id @default(autoincrement())
+  fecha DateTime
+  tanque Int
+  metrica Int
+  agua_pies String
+  agua_pul String
+  crudo_pies String
+  crudo_pul String
+  stock_agua Decimal 
+  stock_crudo Decimal
+  createdAt DateTime  @default(now())   @map("created_at")
+  updatedAt DateTime @updatedAt() @map("updated_at")
+
+lmetrica_med listametricas @relation(fields: [metrica],references: [id])
+ltk_med tanques @relation(fields: [tanque],references: [id])
+
+}
