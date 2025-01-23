@@ -17,5 +17,5 @@ medicionesEnrutador.route("/actlmedicion")
 .put(asyncHandler(actulizarMedicion));
 medicionesEnrutador.route("/registramedicion")
 .put(asyncHandler(registramedicion));
-medicionesEnrutador.route("/borrarmedicon")
+medicionesEnrutador.route("/borrarmedicion")
 .put(asyncHandler(borrarMedicon));

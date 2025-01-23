@@ -16,3 +16,15 @@ aws
 
 Javier.wiesse@gamil.com
 yK*aR*fYz5j@qw^
+
+
+ir a otra session
+git checkout semana09
+
+ 
+{(() =>  {if (id  !== 'null')  {return ( 
+
+ )}
+        else {return ( 
+
+ )}})()}
