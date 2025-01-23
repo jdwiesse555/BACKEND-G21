@@ -57,14 +57,14 @@ export const actulizarMedicion = async (req,res) => {
     if (data.stock_agua == 0 || data.stock_crudo==0 || parseFloat(data.stock_crudo)+parseFloat(data.stock_agua)>parseFloat(tanque.capacidad) ) {
         if(parseFloat(data.stock_crudo)+parseFloat(data.stock_agua)>parseFloat(tanque.capacidad)) {
             return res.json({
-                message:"la suma de los volumenes no puede ser mayor a "+  tanque.capacidad+"volumen crudo: "+data.stock_crudo+"  volumen agua :"+data.stock_agua
+                message:"Error :la suma de los volumenes no puede ser mayor a "+  tanque.capacidad+"volumen crudo: "+data.stock_crudo+"  volumen agua :"+data.stock_agua
                 
             })
 
           
         } else {
             return res.json({
-                message:"No existe data en las tabla en metricas",
+                message:"Error :No existe data en las tabla en metricas",
                 
             })}
         
@@ -116,14 +116,14 @@ export const registramedicion = async (req,res) => {
     if (data.stock_agua == 0 || data.stock_crudo==0 || parseFloat(data.stock_crudo)+parseFloat(data.stock_agua)>parseFloat(tanque.capacidad) ) {
         if(parseFloat(data.stock_crudo)+parseFloat(data.stock_agua)>parseFloat(tanque.capacidad)) {
             return res.json({
-                message:"la suma de los volumenes no puede ser mayor a "+  tanque.capacidad+"volumen crudo: "+data.stock_crudo+"  volumen agua :"+data.stock_agua
+                message:"Error : la suma de los volumenes no puede ser mayor a "+  tanque.capacidad+"volumen crudo: "+data.stock_crudo+"  volumen agua :"+data.stock_agua
                 
             })
 
           
         } else {
             return res.json({
-                message:"No existe data en las tabla en metricas",
+                message:"Error : No existe data en las tabla en metricas",
                 
             })}
         
