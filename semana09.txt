@@ -17,6 +17,12 @@ aws
 Javier.wiesse@gamil.com
 yK*aR*fYz5j@qw^
 
+postgress web
+
+postgresql://tanques_jwl_user:KoLImHhQgrS0zzjiewU2JOoOoF8QHn7l@dpg-cu9cuftumphs73cakg80-a.oregon-postgres.render.com/tanques_jwl
+
+clave :KoLImHhQgrS0zzjiewU2JOoOoF8QHn7l
+usuario:tanques_jwl_user
 
 ir a otra session
 git checkout semana09
@@ -28,3 +34,24 @@ git checkout semana09
         else {return ( 
 
  )}})()}
+
+
+  
+    fetchvol(form.crudo_pies.padStart(2,0)+form.crudo_pul,form.metrica)
+        .then(data => {
+          setMetricas1(data.content)})
+          let datovolcrudo= data.vol_bbls
+    fetchvol(form.agua_pies.padStart(2,0)+form.agua_pul,form.metrica)
+          .then(data => {
+            setMetricas1(data.content)})
+            let datovolagua= data.vol_bbls
+
+   //const datovolcrudo = await fetchvol(form.crudo_pies.padStart(2,0)+form.crudo_pul,form.metrica)
+   // const datovolagua = await fetchvol(form.agua_pies.padStart(2,0)+form.agua_pul,form.metrica)
+    if (datovolcrudo == 0 || datovolagua==0 || parseFloat(datovolcrudo)+parseFloat(datovolagua)>parseFloat(tanques2.capacidad) ) {
+      if(parseFloat(datovolcrudo)+parseFloat(datovolagua)>parseFloat(tanques2.capacidad)) {
+        Swal.fire({title:"la suma de los volumenes no puede ser mayor a "+  tanques2.capacidad,
+          text:"volumen crudo: "+datovolcrudo+"  volumen agua :"+datovolagua})
+      } else {
+      Swal.fire("No existe data en las tabla en metricas")}
+    } else {
